@@ -1,0 +1,7 @@
+Note for Git
+
+Go ahead and run git remote add with the options below:
+
+git remote add origin git@github.com:SalteeDog/RotttenPs.git
+
+2013-04-10 21:04:52	Reading private key file "C:\Users\Catherine\Kierans stuff\KWAmazonKey.ppk"
