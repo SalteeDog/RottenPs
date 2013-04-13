@@ -8,6 +8,8 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.order(params[:sort])
+#    @highlight = Hash.new
+    @highlight = {params[:sort]=>"hilite"}
   end
 
   def new
