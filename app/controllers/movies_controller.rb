@@ -11,11 +11,13 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = Movie.All_ratings
+
     if @selected_ratings==nil
       @selected_ratings = @all_ratings
     end
     if params[:ratings]!=nil
       @selected_ratings = params[:ratings].keys
+      @selected_ratings_hash = params[:ratings]
     end
 
 #    puts @selected_ratings
