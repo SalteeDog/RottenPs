@@ -10,8 +10,16 @@ class MoviesController < ApplicationController
   end
 
   def index
+    @all_ratings = Movie.All_ratings
+
     # Session control
+    @all_ratings_hash = @all_ratings.collect {|r|Hash[r,1]}
     # check if params are null - if so then use session params/rredirect
+    if session[:sort] == nil then session[:sort] ="title"
+      end
+    if session[:ratings] == nil then session[:rratings] = @all_ratings_hash
+
+    end
     if params[:sort] == nil and params[:ratings] == nil then
      params[:sort] = session[:sort]
      params[:ratings] = session[:ratings]
@@ -25,7 +33,7 @@ class MoviesController < ApplicationController
     end
     # End of session control
 
-    @all_ratings = Movie.All_ratings
+
 
     if @selected_ratings==nil
       @selected_ratings = @all_ratings
