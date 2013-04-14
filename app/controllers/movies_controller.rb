@@ -1,5 +1,8 @@
 class MoviesController < ApplicationController
 
+ # @all_ratings = Movie.all_ratings
+ # @all_ratings = ['pg','xx']
+ # @selected_ratings = Movie.All_ratings
   def show
     id = params[:id] # retrieve movie ID from URI route
     @movie = Movie.find(id) # look up movie by unique ID
@@ -7,7 +10,13 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.order(params[:sort])
+    @all_ratings = Movie.All_ratings
+    if params[:ratings]==nil then @selected_ratings = @all_ratings
+    else @selected_ratings = params[:ratings].keys;
+    end
+#    puts @selected_ratings
+#    @movies = Movie.where("rating = ?",params[:ratings].keys).order(params[:sort])
+     @movies = Movie.where(:rating => @selected_ratings).order(params[:sort])
 #    @highlight = Hash.new
     @highlight = {params[:sort]=>"hilite"}
   end
