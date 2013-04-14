@@ -10,6 +10,21 @@ class MoviesController < ApplicationController
   end
 
   def index
+    # Session control
+    # check if params are null - if so then use session params/rredirect
+    if params[:sort] == nil and params[:ratings] == nil then
+     params[:sort] = session[:sort]
+     params[:ratings] = session[:ratings]
+     flash.keep
+     redirect_to movies_path :sort=>params[:sort],:ratings=>params[:ratings]
+
+    else
+    #else save params to session and continue as normal
+     session[:sort] = params[:sort]
+     session[:ratings] = params[:ratings]
+    end
+    # End of session control
+
     @all_ratings = Movie.All_ratings
 
     if @selected_ratings==nil
